@@ -39,6 +39,17 @@ class CloudFoundryCartridge {
                 daysToKeep(variables.logRotatorDays)
                 artifactDaysToKeep(variables.logRotatorArtifactDays)
             }
+            publishers {
+                downstreamParameterized {
+                    trigger(variables.triggerDownstreamJob) {
+                        condition('UNSTABLE_OR_BETTER')
+                        parameters {
+                            predefinedProp('B', variables.nextCopyArtifactsFromBuild)
+                        }
+                    }
+                }
+            }
+
         }
     }
 
@@ -143,14 +154,6 @@ class CloudFoundryCartridge {
                 archiveArtifacts {
                     pattern('**/*')
                     defaultExcludes(false)
-                }
-                downstreamParameterized {
-                    trigger(variables.triggerDownstreamJob) {
-                        condition('UNSTABLE_OR_BETTER')
-                        parameters {
-                            predefinedProp('B', '${BUILD_NUMBER}')
-                        }
-                    }
                 }
             }
         }
