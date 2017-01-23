@@ -163,7 +163,7 @@ class CloudFoundryCartridge {
      * @job a base job that will be extended
      * @variables variables required configuration
      */
-    static getSonarQubeJob(def job, variables, manual) {
+    static getSonarQubeJob(def job, variables) {
         job.with {
             description(variables.jobDescription)
             parameters {
@@ -208,7 +208,7 @@ class CloudFoundryCartridge {
      * @job a base job that will be extended
      * @variables variables required configuration
      */
-    static getGradleJob(def job, variables, manual) {
+    static getGradleJob(def job, variables) {
         job.with {
             description(variables.jobDescription)
             parameters {
@@ -258,7 +258,7 @@ class CloudFoundryCartridge {
      * @job a base job that will be extended
      * @variables variables required configuration
      */
-    static getCfCliJob(def job, variables, manual) {
+    static getCfCliJob(def job, variables) {
         job.with {
             description(variables.jobDescription)
             parameters {
