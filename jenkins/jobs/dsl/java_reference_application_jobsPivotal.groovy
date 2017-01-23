@@ -1,4 +1,4 @@
-import base.PaaSAcademyCartridge
+import base.CloudFoundryCartridge
 
 // Folders
 def workspaceFolderName = "${WORKSPACE_NAME}"
