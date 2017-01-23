@@ -221,17 +221,6 @@ class CloudFoundryCartridge {
             description(variables.jobDescription)
             parameters {
                 stringParam('B', '', 'Parent build job number')
-                credentialsParam("PAAS_LOGIN"){
-                    type('com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl')
-                    required()
-                   defaultValue('cf-credentials')
-                    description('PaaS Provider username and password. Please make sure the credentials are added with ID "cf-credentials"')
-                }
-            }
-            wrappers {
-                credentialsBinding {
-                    usernamePassword("PAAS_USERNAME", "PAAS_PASSWORD", '${PAAS_LOGIN}')
-                }
             }
             steps {
                 copyArtifacts(variables.copyArtifactsFromJob) {
@@ -248,7 +237,7 @@ class CloudFoundryCartridge {
                         |'''.stripMargin() + variables.gradleImage + '''
                         |bash -c " \\
                         |set -xe;  \\
-                        |'''.stripMargin() + variables.jobCommand.stripMargin().stripMargin())
+                        |'''.stripMargin() + variables.jobCommand.stripMargin().stripMargin() + '"')
             }
 
             publishers {

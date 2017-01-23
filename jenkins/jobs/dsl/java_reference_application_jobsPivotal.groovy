@@ -24,7 +24,7 @@ def variables = [
     absoluteJenkinsSlaveHome: '/var/lib/docker/volumes/jenkins_slave_home/_data',
     absoluteWorkspace       : '${ABSOLUTE_JENKINS_SLAVE_HOME}/${JOB_NAME}/',
     cfCliImage              : 'kramos/cfcli',
-    gradleImage             : 'kramos/gradle',
+    gradleImage             : 'kramos/docker-gradle',
     cloudFoundryLib         :  'api.run.pivotal.io api.ng.bluemix.net'
 ]
 
@@ -34,6 +34,7 @@ def pullSCM = CloudFoundryCartridge.getBuildFromSCMJob(
     variables + [
         'artifactDefaultValue': 'spring-music',
         'triggerDownstreamJob': projectFolderName + '/SM_Build'
+        'nextCopyArtifactsFromBuild': '${BUILD_NUMBER}',
     ]
 )
 
