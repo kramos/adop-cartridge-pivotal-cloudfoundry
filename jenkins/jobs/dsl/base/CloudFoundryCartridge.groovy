@@ -175,6 +175,7 @@ class CloudFoundryCartridge {
                         buildNumber('${B}')
                     }
                 }
+            }
 
             configure { myProject ->
                 myProject / builders << 'hudson.plugins.sonar.SonarRunnerBuilder'(plugin: "sonar@2.2.1") {
