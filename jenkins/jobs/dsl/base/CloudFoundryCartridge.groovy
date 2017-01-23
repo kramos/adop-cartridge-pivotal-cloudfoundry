@@ -237,7 +237,7 @@ class CloudFoundryCartridge {
                         |-v ${ABSOLUTE_WORKSPACE}:/jworkspacedir \\
                         |-v /var/run/docker.sock:/var/run/docker.sock \\
                         |-w /jworkspacedir \\
-                        |'''.stripMargin() + variables.cfGradleImage + '''
+                        |'''.stripMargin() + variables.gradleImage + '''
                         |bash -c " \\
                         |set -xe;  \\
                         |'''.stripMargin() + variables.jobCommand.stripMargin().stripMargin())

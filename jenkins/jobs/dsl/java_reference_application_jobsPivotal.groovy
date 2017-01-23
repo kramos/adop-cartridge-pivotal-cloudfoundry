@@ -24,6 +24,7 @@ def variables = [
     absoluteJenkinsSlaveHome: '/var/lib/docker/volumes/jenkins_slave_home/_data',
     absoluteWorkspace       : '${ABSOLUTE_JENKINS_SLAVE_HOME}/${JOB_NAME}/',
     cfCliImage              : 'kramos/cfcli',
+    gradleImage             : 'kramos/gradle',
     cloudFoundryLib         :  'api.run.pivotal.io\napi.ng.bluemix.net'
 ]
 
@@ -32,20 +33,11 @@ def pullSCM = CloudFoundryCartridge.getBuildFromSCMJob(
     CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/Get_Spring_Music', variables),
     variables + [
         'artifactDefaultValue': 'spring-music',
-        'triggerDownstreamJob': projectFolderName + '/Build_CF_CLI_Image'
-    ]
-)
-
-def buildCFUtilityJob = CloudFoundryCartridge.getBuildCfUtilityImageJob(
-    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/Build_CF_CLI_Image', variables),
-    variables + [
-        'copyArtifactsFromJob': projectFolderName + '/Get_Spring_Music',
         'triggerDownstreamJob': projectFolderName + '/SM_Build'
     ]
 )
 
-
-def buildAppJob = CloudFoundryCartridge.getCfCliJob(
+def buildAppJob = CloudFoundryCartridge.getGradleJob(
     CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Build', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/Get_Spring_Music',
@@ -57,7 +49,7 @@ def buildAppJob = CloudFoundryCartridge.getCfCliJob(
 )
 
 
-def unitTestJob = CloudFoundryCartridge.getCfCliJob(
+def unitTestJob = CloudFoundryCartridge.getGradleJob(
     CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Unit_Tests', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/SM_Build',
