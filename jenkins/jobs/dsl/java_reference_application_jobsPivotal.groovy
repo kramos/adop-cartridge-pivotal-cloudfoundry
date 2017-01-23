@@ -25,7 +25,7 @@ def variables = [
     absoluteWorkspace       : '${ABSOLUTE_JENKINS_SLAVE_HOME}/${JOB_NAME}/',
     cfCliImage              : 'kramos/cfcli',
     gradleImage             : 'kramos/gradle',
-    cloudFoundryLib         :  'api.run.pivotal.io\napi.ng.bluemix.net'
+    cloudFoundryLib         :  'api.run.pivotal.io:api.ng.bluemix.net'
 ]
 
 // Jobs

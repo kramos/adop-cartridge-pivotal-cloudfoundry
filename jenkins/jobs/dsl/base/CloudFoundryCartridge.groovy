@@ -263,7 +263,7 @@ class CloudFoundryCartridge {
             description(variables.jobDescription)
             parameters {
                 stringParam('B', '', 'Parent build job number')
-                choiceParam('CF_PROVIDER_LIB', variables.cloudFoundryLib, 'Name of the API library for the Cloud Foundry provider.')
+                choiceParam('CF_PROVIDER_LIB', variables.cloudFoundryLib.tokenise(':'), 'Name of the API library for the Cloud Foundry provider.')
             }
             steps {
                 copyArtifacts(variables.copyArtifactsFromJob) {
