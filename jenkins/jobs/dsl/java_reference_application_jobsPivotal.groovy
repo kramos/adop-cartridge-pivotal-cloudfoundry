@@ -23,7 +23,7 @@ def variables = [
     absoluteJenkinsHome     : '/var/lib/docker/volumes/jenkins_home/_data',
     absoluteJenkinsSlaveHome: '/var/lib/docker/volumes/jenkins_slave_home/_data',
     absoluteWorkspace       : '${ABSOLUTE_JENKINS_SLAVE_HOME}/${JOB_NAME}/',
-    cfCliImage              : 'kramos/cfcli',
+    cfCliImage              : 'kramos/cloud-foundry-cli',
     gradleImage             : 'kramos/docker-gradle',
     cloudFoundryLib         :  'api.run.pivotal.io api.ng.bluemix.net'
 ]
@@ -77,7 +77,7 @@ def cfDeployJob = CloudFoundryCartridge.getCfCliJob(
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/SM_Build',
         'nextCopyArtifactsFromBuild': '${B}',
-        'triggerDownstreamJob': projectFolderName + '/SM_CF_Deploy',
+        'triggerDownstreamJob': projectFolderName + '/TODO',
         'jobDescription': 'This job deploys the springMusic application to a Pivotal Cloud Foundry environment.  The job will fail unless Jenkins credentials called "pcf-credentials" are available for the PaaS account you want to deploy to.',
         'jobCommand': '''cf api --skip-ssl-validation $CF_PROVIDER_LIB; \\
                         |cf login -u \$PAAS_USERNAME -p \$PAAS_PASSWORD; \\
