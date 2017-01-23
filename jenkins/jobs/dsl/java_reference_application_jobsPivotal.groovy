@@ -28,16 +28,16 @@ def variables = [
 ]
 
 // Jobs
-def pullSCM = PaaSAcademyCartridge.getBuildFromSCMJob(
-    PaaSAcademyCartridge.baseCartridgeJob(this, projectFolderName + '/Get_Spring_Music', variables),
+def pullSCM = CloudFoundryCartridge.getBuildFromSCMJob(
+    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/Get_Spring_Music', variables),
     variables + [
         'artifactDefaultValue': 'spring-music',
         'triggerDownstreamJob': projectFolderName + '/Build_CF_CLI_Image'
     ]
 )
 
-def buildCFUtilityJob = PaaSAcademyCartridge.getBuildCfUtilityImageJob(
-    PaaSAcademyCartridge.baseCartridgeJob(this, projectFolderName + '/Build_CF_CLI_Image', variables),
+def buildCFUtilityJob = CloudFoundryCartridge.getBuildCfUtilityImageJob(
+    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/Build_CF_CLI_Image', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/Get_Spring_Music',
         'triggerDownstreamJob': projectFolderName + '/SM_Build'
@@ -45,8 +45,8 @@ def buildCFUtilityJob = PaaSAcademyCartridge.getBuildCfUtilityImageJob(
 )
 
 
-def buildAppJob = PaaSAcademyCartridge.getCfCliJob(
-    PaaSAcademyCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Build', variables),
+def buildAppJob = CloudFoundryCartridge.getCfCliJob(
+    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Build', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/Get_Spring_Music',
         'nextCopyArtifactsFromBuild': '${BUILD_NUMBER}',
@@ -57,8 +57,8 @@ def buildAppJob = PaaSAcademyCartridge.getCfCliJob(
 )
 
 
-def unitTestJob = PaaSAcademyCartridge.getCfCliJob(
-    PaaSAcademyCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Unit_Tests', variables),
+def unitTestJob = CloudFoundryCartridge.getCfCliJob(
+    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Unit_Tests', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/SM_Build',
         'nextCopyArtifactsFromBuild': '${B}',
@@ -68,8 +68,8 @@ def unitTestJob = PaaSAcademyCartridge.getCfCliJob(
     ]
 )
 
-def codeAnalysisJob = PaaSAcademyCartridge.getSonarQubeJob(
-    PaaSAcademyCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Code_Analysis', variables),
+def codeAnalysisJob = CloudFoundryCartridge.getSonarQubeJob(
+    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Code_Analysis', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/SM_Build',
         'nextCopyArtifactsFromBuild': '${B}',
@@ -79,8 +79,8 @@ def codeAnalysisJob = PaaSAcademyCartridge.getSonarQubeJob(
 )
 
 
-def cfDeployJob = PaaSAcademyCartridge.getCfCliJob(
-    PaaSAcademyCartridge.baseCartridgeJob(this, projectFolderName + '/SM_CF_Deploy', variables),
+def cfDeployJob = CloudFoundryCartridge.getCfCliJob(
+    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_CF_Deploy', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/SM_Build',
         'nextCopyArtifactsFromBuild': '${B}',
@@ -96,7 +96,7 @@ def cfDeployJob = PaaSAcademyCartridge.getCfCliJob(
 )
 
 // Views
-def rolePipelineView = PaaSAcademyCartridge.basePipelineView(
+def rolePipelineView = CloudFoundryCartridge.basePipelineView(
     this,
     projectFolderName + '/Spring_Music_To_Cloud_Foundry',
     projectFolderName + '/Get_Spring_Music',
