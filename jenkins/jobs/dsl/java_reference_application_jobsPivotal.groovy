@@ -50,7 +50,7 @@ def buildAppJob = CloudFoundryCartridge.getGradleJob(
 
 
 def unitTestJob = CloudFoundryCartridge.getGradleJob(
-;    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Unit_Tests', variables),
+    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Unit_Tests', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/SM_Build',
         'nextCopyArtifactsFromBuild': '${B}',
