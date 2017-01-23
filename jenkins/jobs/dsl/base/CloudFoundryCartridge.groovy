@@ -270,6 +270,17 @@ class CloudFoundryCartridge {
             parameters {
                 stringParam('B', '', 'Parent build job number')
                 choiceParam('CF_PROVIDER_LIB', variables.cloudFoundryLib.tokenize(), 'Name of the API library for the Cloud Foundry provider.')
+                credentialsParam("PAAS_LOGIN"){
+                    type('com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl')
+                    required()
+                    defaultValue('pcf-credentials')
+                    description('PaaS Provider username and password. Please make sure the credentials are added with ID "pcf-credentials"')
+                }
+            }
+            wrappers {
+                credentialsBinding {
+                    usernamePassword("PAAS_USERNAME", "PAAS_PASSWORD", '${PAAS_LOGIN}')
+                }
             }
             steps {
                 copyArtifacts(variables.copyArtifactsFromJob) {
