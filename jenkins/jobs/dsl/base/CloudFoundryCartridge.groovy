@@ -274,7 +274,7 @@ class CloudFoundryCartridge {
                     type('com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl')
                     required()
                     defaultValue('cf-credentials')
-                    description('PaaS Provider username and password. Please make sure the credentials are added with ID "cf-credentials"')
+                    description('Cloud Foundry PaaS Provider username and password. Please make sure the credentials are added with ID "cf-credentials"')
                 }
             }
             wrappers {
@@ -294,7 +294,7 @@ class CloudFoundryCartridge {
                         |-v ${ABSOLUTE_WORKSPACE}:/jworkspacedir \\
                         |-v /var/run/docker.sock:/var/run/docker.sock \\
                         |-w /jworkspacedir \\
-                        |'''.stripMargin() + variables.cfCliImage + '''
+                        |'''.stripMargin() + variables.cfCliImage + ''' \\
                         |bash -c " \\
                         |set -xe;  \\
                         |'''.stripMargin() + variables.jobCommand.stripMargin() + '''"
