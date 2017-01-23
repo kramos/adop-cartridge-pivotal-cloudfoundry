@@ -24,7 +24,7 @@ def variables = [
     absoluteJenkinsSlaveHome: '/var/lib/docker/volumes/jenkins_slave_home/_data',
     absoluteWorkspace       : '${ABSOLUTE_JENKINS_SLAVE_HOME}/${JOB_NAME}/',
     cfCliImage              : 'kramos/cfcli',
-    cloudFoundryLib:        :  'api.run.pivotal.io\napi.ng.bluemix.net'
+    cloudFoundryLib         :  'api.run.pivotal.io\napi.ng.bluemix.net'
 ]
 
 // Jobs
