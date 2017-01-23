@@ -50,7 +50,7 @@ def buildAppJob = CloudFoundryCartridge.getGradleJob(
 
 
 def unitTestJob = CloudFoundryCartridge.getGradleJob(
-    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Unit_Tests', variables),
+;    CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/SM_Unit_Tests', variables),
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/SM_Build',
         'nextCopyArtifactsFromBuild': '${B}',
@@ -76,7 +76,7 @@ def cfDeployJob = CloudFoundryCartridge.getCfCliJob(
     variables + [
         'copyArtifactsFromJob': projectFolderName + '/SM_Build',
         'nextCopyArtifactsFromBuild': '${B}',
-        'triggerDownstreamJob': projectFolderName + '/Reference_Application_Regression_Tests',
+        'triggerDownstreamJob': projectFolderName + '/SM_CF_Deploy',
         'jobDescription': 'This job deploys the springMusic application to a Pivotal Cloud Foundry environment.  The job will fail unless Jenkins credentials called "pcf-credentials" are available for the PaaS account you want to deploy to.',
         'jobCommand': '''cf api --skip-ssl-validation $CF_PROVIDER_LIB; \\
                         |cf login -u \$PAAS_USERNAME -p \$PAAS_PASSWORD; \\

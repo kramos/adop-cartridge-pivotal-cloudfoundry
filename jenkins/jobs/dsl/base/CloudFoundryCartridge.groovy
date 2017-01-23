@@ -39,17 +39,6 @@ class CloudFoundryCartridge {
                 daysToKeep(variables.logRotatorDays)
                 artifactDaysToKeep(variables.logRotatorArtifactDays)
             }
-            publishers {
-                downstreamParameterized {
-                    trigger(variables.triggerDownstreamJob) {
-                        condition('UNSTABLE_OR_BETTER')
-                        parameters {
-                            predefinedProp('B', variables.nextCopyArtifactsFromBuild)
-                        }
-                    }
-                }
-            }
-
         }
     }
 
@@ -153,7 +142,14 @@ class CloudFoundryCartridge {
             publishers {
                 archiveArtifacts {
                     pattern('**/*')
-                    defaultExcludes(false)
+                }
+                downstreamParameterized {
+                    trigger(variables.triggerDownstreamJob) {
+                        condition('UNSTABLE_OR_BETTER')
+                        parameters {
+                            predefinedProp('B', variables.nextCopyArtifactsFromBuild)
+                        }
+                    }
                 }
             }
         }
@@ -197,9 +193,18 @@ class CloudFoundryCartridge {
             }
 
             publishers {
-                archiveArtifacts('**/*')
+                archiveArtifacts {
+                    pattern('**/*')
+                }
+                downstreamParameterized {
+                    trigger(variables.triggerDownstreamJob) {
+                        condition('UNSTABLE_OR_BETTER')
+                        parameters {
+                            predefinedProp('B', variables.nextCopyArtifactsFromBuild)
+                        }
+                    }
+                }
             }
-
         }
 
         return job
@@ -247,9 +252,18 @@ class CloudFoundryCartridge {
             }
 
             publishers {
-                archiveArtifacts('**/*')
+                archiveArtifacts {
+                    pattern('**/*')
+                }
+                downstreamParameterized {
+                    trigger(variables.triggerDownstreamJob) {
+                        condition('UNSTABLE_OR_BETTER')
+                        parameters {
+                            predefinedProp('B', variables.nextCopyArtifactsFromBuild)
+                        }
+                    }
+                }
             }
-
         }
 
         return job
@@ -294,9 +308,18 @@ class CloudFoundryCartridge {
             }
 
             publishers {
-                archiveArtifacts('**/*')
+                archiveArtifacts {
+                    pattern('**/*')
+                }
+                downstreamParameterized {
+                    trigger(variables.triggerDownstreamJob) {
+                        condition('UNSTABLE_OR_BETTER')
+                        parameters {
+                            predefinedProp('B', variables.nextCopyArtifactsFromBuild)
+                        }
+                    }
+                }
             }
-
         }
 
         return job
