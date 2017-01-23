@@ -33,7 +33,7 @@ def pullSCM = CloudFoundryCartridge.getBuildFromSCMJob(
     CloudFoundryCartridge.baseCartridgeJob(this, projectFolderName + '/Get_Spring_Music', variables),
     variables + [
         'artifactDefaultValue': 'spring-music',
-        'triggerDownstreamJob': projectFolderName + '/SM_Build'
+        'triggerDownstreamJob': projectFolderName + '/SM_Build',
         'nextCopyArtifactsFromBuild': '${BUILD_NUMBER}',
     ]
 )
