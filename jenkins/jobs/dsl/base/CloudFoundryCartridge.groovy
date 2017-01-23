@@ -273,8 +273,8 @@ class CloudFoundryCartridge {
                 credentialsParam("PAAS_LOGIN"){
                     type('com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl')
                     required()
-                    defaultValue('pcf-credentials')
-                    description('PaaS Provider username and password. Please make sure the credentials are added with ID "pcf-credentials"')
+                    defaultValue('cf-credentials')
+                    description('PaaS Provider username and password. Please make sure the credentials are added with ID "cf-credentials"')
                 }
             }
             wrappers {
