@@ -179,7 +179,7 @@ class CloudFoundryCartridge {
             configure { myProject ->
                 myProject / builders << 'hudson.plugins.sonar.SonarRunnerBuilder'(plugin: "sonar@2.2.1") {
                     project('sonar-project.properties')
-                    properties('''sonar.projectKey='''' + variables.projectNameKey + '''
+                    properties('''sonar.projectKey=''' + variables.projectNameKey + '''
                                   sonar.projectName=${PROJECT_NAME}
                                   sonar.projectVersion=1.0.${B}
                                   sonar.sources=src/main/java
