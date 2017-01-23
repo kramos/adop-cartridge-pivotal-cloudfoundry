@@ -263,7 +263,6 @@ class CloudFoundryCartridge {
             description(variables.jobDescription)
             parameters {
                 stringParam('B', '', 'Parent build job number')
-                stringParam('B', '', 'Parent build job number')
                 choiceParam('CF_PROVIDER_LIB', variables.cloudFoundryLib, 'Name of the API library for the Cloud Foundry provider.', 'api.run.pivotal.io')
             }
             steps {
